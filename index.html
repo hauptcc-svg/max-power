@@ -2171,4 +2171,46 @@
 
   <!-- ══════════════════════════════════════
        SCRIPTS
-  ══════════════════════�
+  ══════════════════════════════════════ -->
+  <script>
+    // Scroll reveal via IntersectionObserver
+    (function () {
+      var observer = new IntersectionObserver(
+        function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      document.querySelectorAll('.reveal').forEach(function(el) {
+        observer.observe(el);
+      });
+    })();
+
+    // Copy account number
+    function copyAccountNumber() {
+      var accountNumber = '1854590403';
+      var btn = document.getElementById('copyAccBtn');
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(accountNumber).then(function() {
+          btn.textContent = '\u2713 Copied!';
+          setTimeout(function() { btn.innerHTML = '&#x2398; Copy Account Number'; }, 2000);
+        });
+      } else {
+        var el = document.createElement('textarea');
+        el.value = accountNumber;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        btn.textContent = '\u2713 Copied!';
+        setTimeout(function() { btn.innerHTML = '&#x2398; Copy Account Number'; }, 2000);
+      }
+    }
+  </script>
+</body>
+</html>
