@@ -2169,11 +2169,35 @@
     </div>
   </footer>
 
-  <!-- ══════════════════════════════════════
+  <!-- ══════════════════════
        SCRIPTS
-  ══════════════════════════════════════ -->
+  ══════════════════════ -->
   <script>
-    // Scroll reveal via IntersectionObserver
+    // ── HERO ENTRANCE (GSAP) ─────────────────────────────
+    window.addEventListener('load', function () {
+      if (typeof gsap === 'undefined') {
+        // GSAP failed to load — make everything visible immediately
+        document.querySelectorAll(
+          '.hero-eyebrow, .hero-title-line, .hero-sub, .badge, .hero-ctas, .hero-scroll'
+        ).forEach(function(el) {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        });
+        return;
+      }
+
+      var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      tl.to('.hero-eyebrow',    { opacity: 1, duration: 0.6, delay: 0.15 })
+        .to('#gsap-line1',      { opacity: 1, y: 0, duration: 0.7 }, '-=0.3')
+        .to('#gsap-line2',      { opacity: 1, y: 0, duration: 0.7 }, '-=0.5')
+        .to('.hero-sub',        { opacity: 1, duration: 0.6 }, '-=0.4')
+        .to('.badge',           { opacity: 1, y: 0, duration: 0.5, stagger: 0.07 }, '-=0.3')
+        .to('.hero-ctas',       { opacity: 1, duration: 0.5 }, '-=0.2')
+        .to('.hero-scroll',     { opacity: 1, duration: 0.5 }, '-=0.2');
+    });
+
+    // ── SCROLL REVEAL (IntersectionObserver) ─────────────
     (function () {
       var observer = new IntersectionObserver(
         function(entries) {
@@ -2184,14 +2208,14 @@
             }
           });
         },
-        { threshold: 0.1 }
+        { threshold: 0.08 }
       );
       document.querySelectorAll('.reveal').forEach(function(el) {
         observer.observe(el);
       });
     })();
 
-    // Copy account number
+    // ── COPY ACCOUNT NUMBER ───────────────────────────────
     function copyAccountNumber() {
       var accountNumber = '1854590403';
       var btn = document.getElementById('copyAccBtn');
