@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Max Power | Macethandile Kulati | 2× IBFF World Champion</title>
   <meta name="description" content="Macethandile 'Max' Kulati — 2× IBFF World Disabled Bodybuilding Champion from Kariega, SA. Support his journey. I'm Strong and Able.">
@@ -92,10 +93,12 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: background 0.35s, backdrop-filter 0.35s;
+      background: rgba(10,10,10,0.0);
+      transition: background 0.35s, backdrop-filter 0.35s, border-color 0.35s;
+      border-bottom: 1px solid transparent;
     }
     nav.scrolled {
-      background: rgba(10,10,10,0.94);
+      background: rgba(10,10,10,1);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
@@ -2197,6 +2200,20 @@
         .to('.hero-ctas',       { opacity: 1, duration: 0.5 }, '-=0.2')
         .to('.hero-scroll',     { opacity: 1, duration: 0.5 }, '-=0.2');
     });
+
+    // ── NAV SCROLL BEHAVIOUR ──────────────────────────────
+    (function () {
+      var nav = document.querySelector('nav');
+      function updateNav() {
+        if (window.scrollY > 60) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+      window.addEventListener('scroll', updateNav, { passive: true });
+      updateNav();
+    })();
 
     // ── SCROLL REVEAL (IntersectionObserver) ─────────────
     (function () {
