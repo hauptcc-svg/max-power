@@ -1,0 +1,2173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Max Power | Macethandile Kulati | 2× IBFF World Champion</title>
+  <meta name="description" content="Macethandile 'Max' Kulati — 2× IBFF World Disabled Bodybuilding Champion from Kariega, SA. Support his journey. I'm Strong and Able.">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* ─────────────────────────────────────────────
+       RESET & TOKENS
+    ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0a0a0a;
+      --dark:    #111111;
+      --mid:     #181818;
+      --card:    #1e1e1e;
+      --border:  rgba(255,255,255,0.07);
+      --gold:    #c9912a;
+      --gold-lt: rgba(201,145,42,0.10);
+      --orange:  #e8620a;
+      --white:   #f0f0f0;
+      --muted:   rgba(240,240,240,0.65);
+      --dimmed:  rgba(240,240,240,0.40);
+      --radius:  4px;
+      --grad:    linear-gradient(135deg, #e8620a 0%, #c9912a 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    /* Grain texture overlay — humanizing texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.028;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ─────────────────────────────────────────────
+       SKIP NAV
+    ───────────────────────────────────────────── */
+    .skip-nav {
+      position: fixed;
+      top: -100%;
+      left: 16px;
+      z-index: 9999;
+      background: var(--gold);
+      color: #000;
+      padding: 10px 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: top 0.2s;
+    }
+    .skip-nav:focus { top: 16px; }
+
+    /* ─────────────────────────────────────────────
+       NAV
+    ───────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 18px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.35s, backdrop-filter 0.35s;
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.55rem;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: rgba(240,240,240,0.65);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--grad);
+      color: #fff;
+      padding: 9px 22px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ─────────────────────────────────────────────
+       HERO — SPLIT LAYOUT + GSAP
+    ───────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 720px;
+      display: grid;
+      grid-template-columns: 55% 45%;
+      overflow: hidden;
+      background: var(--black);
+    }
+
+    .hero-left {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 56px 80px 64px;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 32px;
+      height: 2px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ── HERO TITLE — MUCH BIGGER ── */
+    .hero-title {
+      font-size: clamp(8rem, 14vw, 16rem);
+      line-height: 0.84;
+      margin-bottom: 24px;
+      overflow: visible;
+    }
+    .hero-title-line {
+      display: block;
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    .hero-title-line.gradient {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 440px;
+      margin-bottom: 32px;
+      font-weight: 300;
+      line-height: 1.7;
+      opacity: 0;
+    }
+    .hero-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .badge {
+      border: 1px solid rgba(201,145,42,0.35);
+      color: var(--gold);
+      font-size: 0.64rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      opacity: 0;
+    }
+    .btn-primary {
+      background: var(--grad);
+      color: #fff;
+      padding: 15px 32px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: opacity 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+    .btn-outline {
+      border: 1px solid rgba(240,240,240,0.28);
+      color: var(--white);
+      padding: 15px 32px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: border-color 0.2s, background 0.2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--gold); background: var(--gold-lt); }
+
+    /* RIGHT — photo panel */
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--black) 0%, transparent 28%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .hero-right::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 60%, rgba(201,145,42,0.06) 0%, transparent 70%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      opacity: 0;
+      transform: translateY(40px);
+      z-index: 0;
+    }
+    .hero-photo-fade {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 28%;
+      background: linear-gradient(to top, var(--black), transparent);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 64px;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dimmed);
+      opacity: 0;
+    }
+    .hero-scroll-line {
+      width: 40px;
+      height: 1px;
+      background: var(--dimmed);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; width: 40px; }
+      50%       { opacity: 1;   width: 56px; }
+    }
+
+    /* ─────────────────────────────────────────────
+       STATS BAR
+    ───────────────────────────────────────────── */
+    .stats-bar {
+      background: var(--grad);
+      padding: 36px 64px;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .stat { text-align: center; }
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.2rem;
+      letter-spacing: 0.05em;
+      color: #fff;
+      display: block;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.82);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* ─────────────────────────────────────────────
+       SHARED SECTION TOKENS
+    ───────────────────────────────────────────── */
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::before {
+      content: '';
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-size: clamp(2.6rem, 4.5vw, 4.5rem);
+      margin-bottom: 20px;
+      line-height: 1.0;
+    }
+    .section-body {
+      color: var(--muted);
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 580px;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.12s; }
+    .reveal-delay-2 { transition-delay: 0.24s; }
+    .reveal-delay-3 { transition-delay: 0.36s; }
+
+    /* ─────────────────────────────────────────────
+       INTRO
+    ───────────────────────────────────────────── */
+    .intro {
+      background: var(--dark);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+      padding: 100px 64px;
+    }
+    .intro-image {
+      position: relative;
+    }
+    .intro-image img {
+      width: 100%;
+      height: 560px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: var(--radius);
+    }
+    .intro-image::after {
+      content: '';
+      position: absolute;
+      top: 16px; left: 16px; right: -16px; bottom: -16px;
+      border: 1px solid rgba(201,145,42,0.22);
+      border-radius: var(--radius);
+      pointer-events: none;
+    }
+    .intro-quote {
+      font-size: 1.22rem;
+      font-style: italic;
+      color: var(--gold);
+      margin: 28px 0;
+      line-height: 1.55;
+      padding-left: 18px;
+      border-left: 3px solid var(--gold);
+    }
+
+    /* ─────────────────────────────────────────────
+       IN HIS OWN WORDS — Large editorial pull quote
+    ───────────────────────────────────────────── */
+    .words-section {
+      background: var(--black);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
+      overflow: hidden;
+    }
+    .words-quote-wrap {
+      padding: 90px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+    .words-open-quote {
+      font-family: 'Caveat', cursive;
+      font-size: 10rem;
+      color: var(--gold);
+      line-height: 0.7;
+      margin-bottom: 0;
+      opacity: 0.3;
+      display: block;
+    }
+    .words-quote {
+      font-size: clamp(1.3rem, 2.2vw, 1.85rem);
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.6;
+      font-weight: 300;
+      max-width: 500px;
+      margin-top: -10px;
+    }
+    .words-cite {
+      display: block;
+      margin-top: 28px;
+      font-family: 'Caveat', cursive;
+      font-size: 1.5rem;
+      color: var(--gold);
+      font-style: normal;
+      font-weight: 600;
+    }
+    .words-context {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--dimmed);
+    }
+    .words-photo {
+      position: relative;
+      overflow: hidden;
+    }
+    .words-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .words-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--black) 0%, transparent 22%);
+      z-index: 1;
+    }
+
+    /* ─────────────────────────────────────────────
+       ACHIEVEMENTS
+    ───────────────────────────────────────────── */
+    .achievements {
+      background: var(--mid);
+      padding: 100px 64px;
+    }
+    .achievements-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+      margin-bottom: 60px;
+    }
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .achievement-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .achievement-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--grad);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .achievement-card:hover { border-color: rgba(201,145,42,0.22); transform: translateY(-5px); }
+    .achievement-card:hover::before { opacity: 1; }
+    .achievement-icon { font-size: 1.6rem; margin-bottom: 16px; display: block; }
+    .achievement-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      margin-bottom: 10px;
+      line-height: 1.1;
+    }
+    .achievement-desc {
+      font-size: 0.86rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.65;
+    }
+    .achievement-note {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.72rem;
+      color: var(--dimmed);
+      font-style: italic;
+    }
+
+    /* ─────────────────────────────────────────────
+       STORY — Editorial Timeline
+    ───────────────────────────────────────────── */
+    .story-section {
+      background: var(--dark);
+      padding: 100px 64px;
+    }
+    .story-intro {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: end;
+      margin-bottom: 80px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .story-timeline {
+      position: relative;
+      padding-left: 40px;
+    }
+    /* Vertical gold timeline line */
+    .story-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold) 0%, rgba(201,145,42,0.15) 100%);
+    }
+    .story-chapter {
+      position: relative;
+      margin-bottom: 64px;
+      padding-bottom: 64px;
+      border-bottom: 1px solid var(--border);
+    }
+    .story-chapter:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    /* Gold dot on the line */
+    .story-chapter::before {
+      content: '';
+      position: absolute;
+      left: -47px;
+      top: 10px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--dark);
+      z-index: 1;
+    }
+    .chapter-year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.0rem;
+      letter-spacing: 0.24em;
+      color: var(--gold);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .chapter-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      color: var(--white);
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+    .chapter-body {
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.85;
+      margin-bottom: 14px;
+      max-width: 640px;
+    }
+    .chapter-quote {
+      font-size: 1.12rem;
+      font-style: italic;
+      color: var(--gold);
+      border-left: 3px solid var(--gold);
+      padding-left: 20px;
+      margin: 24px 0;
+      line-height: 1.6;
+      max-width: 560px;
+    }
+    /* 2-col layout: text left, photo right */
+    .chapter-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .chapter-inner .chapter-body { max-width: none; }
+    .chapter-inner .chapter-quote { max-width: none; }
+    .chapter-visual {
+      position: sticky;
+      top: 110px;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .chapter-visual img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+
+    /* ─────────────────────────────────────────────
+       JOURNEY IN PHOTOS — Full Carousel
+    ───────────────────────────────────────────── */
+    .journey-section {
+      background: var(--black);
+      padding: 100px 0 0;
+    }
+    .journey-header {
+      padding: 0 64px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 44px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    /* ── Instagram-style photo grid ── */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      background: #000;
+    }
+    .photo-tile {
+      aspect-ratio: 1;
+      overflow: hidden;
+      position: relative;
+      display: block;
+      text-decoration: none;
+    }
+    .photo-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .photo-tile:hover img { transform: scale(1.06); }
+    .photo-tile-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 16px;
+      transition: background 0.3s;
+    }
+    .photo-tile:hover .photo-tile-overlay,
+    .photo-tile:focus-visible .photo-tile-overlay {
+      background: rgba(0,0,0,0.58);
+    }
+    .photo-tile-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 4px;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.28s, transform 0.28s;
+    }
+    .photo-tile-desc {
+      font-size: 0.78rem;
+      color: rgba(240,240,240,0.88);
+      font-weight: 300;
+      line-height: 1.4;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.28s 0.04s, transform 0.28s 0.04s;
+    }
+    .photo-tile:hover .photo-tile-label,
+    .photo-tile:hover .photo-tile-desc,
+    .photo-tile:focus-visible .photo-tile-label,
+    .photo-tile:focus-visible .photo-tile-desc {
+      opacity: 1;
+      transform: none;
+    }
+    .photo-tile:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: -3px;
+      z-index: 1;
+    }
+    .journey-section-footer {
+      padding: 36px 64px;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ─────────────────────────────────────────────
+       CINEMATIC BANNER
+    ───────────────────────────────────────────── */
+    .champ-banner {
+      position: relative;
+      height: 460px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .champ-bg {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3px;
+    }
+    .champ-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      filter: brightness(0.22) saturate(0.5);
+    }
+    .champ-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(10,10,10,0.1);
+    }
+    .champ-text {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      width: 100%;
+      padding: 0 64px;
+    }
+    .champ-text h2 { font-size: clamp(3.5rem, 7vw, 7.5rem); margin-bottom: 14px; }
+    .champ-text h2 span { color: var(--gold); }
+    .champ-text p {
+      font-size: 1.05rem;
+      color: rgba(240,240,240,0.78);
+      font-weight: 300;
+      max-width: 520px;
+      margin: 0 auto 36px;
+    }
+
+    /* ─────────────────────────────────────────────
+       COMMUNITY
+    ───────────────────────────────────────────── */
+    .does {
+      background: var(--mid);
+      padding: 100px 64px;
+    }
+    .does-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      margin-top: 60px;
+      align-items: start;
+    }
+    .does-cards { display: flex; flex-direction: column; gap: 20px; }
+    .does-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px 30px;
+      border-left: 3px solid var(--gold);
+    }
+    .does-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .does-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+    .does-card .quote {
+      font-style: italic;
+      color: var(--dimmed);
+      margin-top: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      font-family: 'Caveat', cursive;
+      font-size: 1.1rem;
+      color: rgba(201,145,42,0.7);
+    }
+    .does-single-image {
+      position: relative;
+      height: 520px;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .does-single-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius);
+    }
+    .does-single-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 55%, rgba(8,7,6,0.55) 100%);
+      border-radius: var(--radius);
+      pointer-events: none;
+    }
+
+    /* ─────────────────────────────────────────────
+       PRESS — with real links
+    ───────────────────────────────────────────── */
+    .press {
+      background: var(--dark);
+      padding: 90px 64px;
+    }
+    .press-inner { max-width: 960px; margin: 0 auto; text-align: center; }
+    .press-quotes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      text-align: left;
+      margin: 52px 0;
+    }
+    .press-quote {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px;
+      border-top: 2px solid var(--gold);
+      position: relative;
+    }
+    .press-quote blockquote {
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(240,240,240,0.9);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+    .press-quote blockquote::before {
+      content: '"';
+      font-family: 'Caveat', cursive;
+      font-size: 2.5rem;
+      color: var(--gold);
+      opacity: 0.4;
+      display: block;
+      line-height: 0.8;
+      margin-bottom: 10px;
+    }
+    .press-quote cite {
+      font-size: 0.72rem;
+      color: var(--gold);
+      font-style: normal;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .press-logos {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .press-logo-item {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      color: rgba(240,240,240,0.38);
+      padding: 10px 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .press-logo-item:hover {
+      color: var(--gold);
+      border-color: rgba(201,145,42,0.3);
+      background: var(--gold-lt);
+    }
+    .press-logo-item:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    /* ─────────────────────────────────────────────
+       HARDWARE — Full section (not a banner)
+    ───────────────────────────────────────────── */
+    .hardware {
+      background: var(--black);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hardware-photo {
+      height: 640px;
+      overflow: hidden;
+      position: relative;
+    }
+    .hardware-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .hardware-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 70%, var(--black) 100%);
+      pointer-events: none;
+    }
+    .hardware-text {
+      padding: 80px 64px 80px 48px;
+    }
+    .hardware-titles {
+      margin-top: 32px;
+    }
+    .hardware-title-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .hardware-title-row:last-child { border-bottom: none; }
+    .hardware-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+    .hardware-detail strong {
+      display: block;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 0.96rem;
+      margin-bottom: 3px;
+    }
+    .hardware-detail span {
+      font-size: 0.8rem;
+      color: var(--dimmed);
+    }
+
+    /* ─────────────────────────────────────────────
+       SUPPORT
+    ───────────────────────────────────────────── */
+    .support {
+      background: var(--mid);
+      padding: 100px 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .support-img-wrap img {
+      width: 100%;
+      border-radius: var(--radius);
+      object-fit: cover;
+      max-height: 540px;
+      object-position: top;
+    }
+    .support h2 { font-size: clamp(2.5rem, 4vw, 4rem); margin-bottom: 18px; }
+    .support p { color: var(--muted); font-weight: 300; font-size: 0.96rem; margin-bottom: 14px; line-height: 1.8; }
+    .use-of-funds {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin: 24px 0;
+    }
+    .use-of-funds h4 {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .fund-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 9px;
+      font-weight: 300;
+    }
+    .fund-arrow { color: var(--gold); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .banking-headline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .banking-headline::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.7;
+    }
+    .banking-box {
+      background: var(--black);
+      border: 1px solid rgba(201,145,42,0.18);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin: 20px 0;
+    }
+    .banking-box h4 {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 11px 22px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      border-radius: 4px;
+      color: var(--gold);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-family: 'Bebas Neue', sans-serif;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .copy-btn:hover { background: var(--gold); color: var(--black); }
+    .copy-btn.copied { background: var(--gold); color: var(--black); }
+    .banking-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.86rem;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .banking-row:last-child { border-bottom: none; }
+    .banking-label { color: rgba(240,240,240,0.48); }
+    .banking-value { color: var(--white); font-weight: 600; }
+    /* .team-contact removed — moved to footer */
+    .support-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+
+    /* ─────────────────────────────────────────────
+       SOCIAL
+    ───────────────────────────────────────────── */
+    .social {
+      background: var(--black);
+      padding: 90px 64px;
+      text-align: center;
+    }
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 48px;
+      text-align: left;
+    }
+    .social-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px;
+      text-decoration: none;
+      color: var(--white);
+      transition: border-color 0.2s, transform 0.2s;
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .social-card:hover { border-color: rgba(201,145,42,0.28); transform: translateY(-3px); }
+    .social-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .social-icon { font-size: 1.7rem; margin-bottom: 12px; display: block; }
+    .social-platform {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .social-handle { font-size: 0.82rem; color: var(--dimmed); }
+
+    /* ─────────────────────────────────────────────
+       YOUTUBE
+    ───────────────────────────────────────────── */
+    .youtube {
+      background: var(--dark);
+      padding: 80px 64px;
+    }
+    .yt-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 48px;
+    }
+    .yt-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-decoration: none;
+      color: var(--white);
+      transition: transform 0.3s;
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .yt-card:hover { transform: translateY(-4px); }
+    .yt-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .yt-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      position: relative;
+      overflow: hidden;
+    }
+    .yt-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      opacity: 0.45;
+      transition: opacity 0.3s;
+    }
+    .yt-card:hover .yt-thumb img { opacity: 0.62; }
+    .yt-thumb::after {
+      content: '▶';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.9);
+      font-size: 2.2rem;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.7);
+    }
+    .yt-info { padding: 16px; }
+    .yt-info h4 { font-size: 0.88rem; font-weight: 600; margin-bottom: 6px; line-height: 1.4; }
+    .yt-info span { font-size: 0.75rem; color: var(--dimmed); }
+
+    /* ─────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────── */
+    footer {
+      background: #060606;
+      padding: 60px 64px 36px;
+      border-top: 1px solid var(--border);
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 48px;
+    }
+    .footer-brand h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.9rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .footer-brand h3 span { color: var(--gold); }
+    .footer-brand p { color: var(--dimmed); font-size: 0.88rem; font-weight: 300; line-height: 1.75; max-width: 310px; }
+    .footer-tagline {
+      font-family: 'Caveat', cursive;
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-top: 14px;
+      display: block;
+    }
+    .footer-col h4 {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .footer-col a, .footer-col p {
+      display: block;
+      color: var(--dimmed);
+      text-decoration: none;
+      font-size: 0.86rem;
+      margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .footer-bottom p { font-size: 0.78rem; color: var(--dimmed); }
+    .footer-bottom em { color: var(--gold); font-style: italic; font-family: 'Caveat', cursive; font-size: 0.9rem; }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      nav { padding: 16px 40px; }
+      .hero { grid-template-columns: 1fr 1fr; }
+      .hero-left { padding: 100px 40px 60px; }
+      .hero-title { font-size: clamp(6rem, 12vw, 10rem); }
+      .intro, .story-section, .support { padding: 80px 40px; }
+      .achievements, .does, .press, .social, .youtube { padding: 80px 40px; }
+      .journey-section { padding: 80px 0 0; }
+      .journey-header { padding: 0 40px; }
+      .journey-section-footer { padding: 32px 40px; }
+      .achievements-grid { grid-template-columns: repeat(2, 1fr); }
+      .yt-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .footer-brand { grid-column: 1 / -1; }
+      .stats-bar { padding: 36px 40px; }
+      .words-section { grid-template-columns: 1fr 1fr; }
+      .hardware-text { padding: 60px 40px 60px 36px; }
+      .hardware-photo { height: 560px; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 24px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; height: auto; min-height: 100vh; }
+      .hero-left { padding: 100px 24px 60px; z-index: 3; }
+      .hero-right {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        opacity: 0.25;
+      }
+      .hero-right::before { background: linear-gradient(to right, rgba(10,10,10,0.97) 0%, rgba(10,10,10,0.65) 100%); }
+      .hero-title { font-size: clamp(5.5rem, 18vw, 8rem); }
+      .intro, .story-section, .support { grid-template-columns: 1fr; gap: 40px; padding: 64px 24px; }
+      .achievements, .does, .press, .social, .youtube { padding: 64px 24px; }
+      .journey-section { padding: 64px 0 0; }
+      .journey-header { padding: 0 24px; }
+      .journey-section-footer { padding: 24px; }
+      .photo-grid { grid-template-columns: repeat(3, 1fr); }
+      .words-section { grid-template-columns: 1fr; min-height: auto; }
+      .words-photo { height: 300px; }
+      .words-photo::before { background: linear-gradient(to bottom, var(--black) 0%, transparent 30%); }
+      .words-quote-wrap { padding: 60px 24px; order: 2; }
+      .words-photo { order: 1; }
+      .does-grid { grid-template-columns: 1fr; }
+      .does-single-image { height: 320px; }
+      .achievements-grid { grid-template-columns: 1fr; }
+      .achievements-header { grid-template-columns: 1fr; gap: 0; margin-bottom: 40px; }
+      .press-quotes { grid-template-columns: 1fr; }
+      .social-grid { grid-template-columns: 1fr; }
+      .yt-grid { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .stats-bar { padding: 32px 24px; }
+      .hardware { grid-template-columns: 1fr; }
+      .hardware-photo { height: 420px; }
+      .hardware-photo::after { background: linear-gradient(to bottom, transparent 60%, var(--black) 100%); }
+      .hardware-text { padding: 48px 24px; }
+      .champ-bg { grid-template-columns: 1fr 1fr; }
+      .champ-bg img:last-child { display: none; }
+      .champ-text { padding: 0 24px; }
+      .story-timeline { padding-left: 28px; }
+      .story-chapter::before { left: -35px; }
+      .story-intro { grid-template-columns: 1fr; gap: 40px; }
+      .chapter-inner { grid-template-columns: 1fr; gap: 28px; }
+      .chapter-visual { position: static; }
+      .chapter-visual img { height: 260px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: clamp(4.5rem, 20vw, 7rem); }
+      .yt-grid { grid-template-columns: 1fr; }
+      .photo-grid { gap: 2px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
+
+  <!-- NAV -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <a href="#" class="nav-logo" aria-label="Max Power — home">MAX <span>POWER</span></a>
+    <ul class="nav-links" role="list">
+      <li><a href="#story">Story</a></li>
+      <li><a href="#journey">Gallery</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#press">Press</a></li>
+      <li><a href="#support">Support</a></li>
+      <li><a href="sponsorship_deck.html" target="_blank">Sponsor</a></li>
+    </ul>
+    <a href="#support" class="nav-cta">Support Max</a>
+  </nav>
+
+  <!-- ══════════════════════════════════════
+       HERO — SPLIT LAYOUT + GSAP
+  ══════════════════════════════════════ -->
+  <section class="hero" aria-label="Hero">
+
+    <!-- LEFT: text -->
+    <div class="hero-left">
+      <span class="hero-eyebrow" id="gsap-eyebrow">
+        Kariega, Eastern Cape &middot; South Africa
+      </span>
+
+      <h1 class="hero-title" aria-label="Max Power">
+        <span class="hero-title-line" id="gsap-line1">MAX</span>
+        <span class="hero-title-line gradient" id="gsap-line2">POWER</span>
+      </h1>
+
+      <p class="hero-sub" id="gsap-sub">
+        Partially paralysed. IBFF Pro. Two-time World Disabled Bodybuilding Champion. And he's just getting started.
+      </p>
+
+      <div class="hero-badges" aria-label="Key facts" id="gsap-badges">
+        <span class="badge">2× IBFF World Champion</span>
+        <span class="badge">IBFF Pro Athlete</span>
+        <span class="badge">SA National Champion</span>
+        <span class="badge">Motivational Speaker</span>
+        <span class="badge">Fitness Coach</span>
+      </div>
+
+      <div class="hero-ctas" id="gsap-ctas">
+        <a href="#support" class="btn-primary">Support Max's Journey</a>
+        <a href="#story" class="btn-outline">Read His Story</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: photo -->
+    <div class="hero-right" aria-hidden="true">
+      <img
+        class="hero-photo"
+        id="gsap-photo"
+        src="photo_stage_backpose.png"
+        style="object-position: center 15%;"
+        alt=""
+        loading="eager"
+      >
+      <div class="hero-photo-fade"></div>
+    </div>
+
+    <div class="hero-scroll" id="gsap-scroll" aria-hidden="true">
+      <span class="hero-scroll-line"></span>
+      Scroll
+    </div>
+
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar" role="region" aria-label="Key statistics">
+    <div class="stat">
+      <span class="stat-number">2×</span>
+      <span class="stat-label">IBFF World Champion</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">2022</span>
+      <span class="stat-label">First World Title — Slovenia</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">2023</span>
+      <span class="stat-label">Second World Title — Slovenia</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">2kg</span>
+      <span class="stat-label">Started With Dumbbells</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">R0</span>
+      <span class="stat-label">Government Funding Received</span>
+    </div>
+  </div>
+
+  <main id="main-content">
+
+    <!-- ══════════════════════════════════════
+         INTRO
+    ══════════════════════════════════════ -->
+    <section class="intro" aria-labelledby="intro-heading">
+      <div class="intro-image reveal">
+        <img
+          src="photo_ig_redvest_gym.png"
+          alt="Macethandile 'Max' Kulati — IBFF Pro bodybuilder, red Iron Wolf vest, outdoors at the gym, thumbs up"
+          style="object-position: center 20%;"
+          loading="lazy"
+        >
+      </div>
+      <div class="reveal reveal-delay-1">
+        <span class="section-label">Introduction</span>
+        <h2 class="section-title" id="intro-heading">"I'm Strong<br>and Able."</h2>
+        <p class="section-body" style="margin-bottom:24px;">
+          He had a surgery that changed his body. It didn't change who he was.
+        </p>
+        <blockquote class="intro-quote">
+          "I realized I needed to transform my negative thoughts and find pride in myself again."
+        </blockquote>
+        <p class="section-body">
+          In 2014, a medical procedure left Max partially paralysed. He was 22, living in Moeggesukkel — one of the most impoverished neighbourhoods in Kariega, Eastern Cape. The road most people expected him to walk ended there. Max had other ideas.
+        </p>
+        <a href="#story" class="btn-outline" style="margin-top:32px;">Read His Full Story</a>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         IN HIS OWN WORDS — Editorial pull quote
+    ══════════════════════════════════════ -->
+    <div class="words-section reveal" role="region" aria-label="Max in his own words">
+      <div class="words-quote-wrap">
+        <span class="words-open-quote" aria-hidden="true">"</span>
+        <blockquote class="words-quote">
+          The gym is my second church after church. I'm obsessed with weights. The gym is my comfort zone — a place for me to clear my mind.
+        </blockquote>
+        <cite class="words-cite">— Macethandile "Max" Kulati</cite>
+        <span class="words-context">World Champion · Kariega, Eastern Cape</span>
+      </div>
+      <div class="words-photo" aria-hidden="true">
+        <img src="photo_ibffpro_jacket.png" alt="" loading="lazy">
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         ACHIEVEMENTS
+    ══════════════════════════════════════ -->
+    <section class="achievements" id="achievements" aria-labelledby="achievements-heading">
+      <div class="achievements-header">
+        <div class="reveal">
+          <span class="section-label">Achievements</span>
+          <h2 class="section-title" id="achievements-heading">A Champion Built From the Ground Up</h2>
+        </div>
+        <p class="section-body reveal reveal-delay-1">
+          No sponsor. No government grant. No state-of-the-art facility. Just an unshakeable belief that strength comes from within — and a willingness to show up every single day.
+        </p>
+      </div>
+      <div class="achievements-grid">
+        <div class="achievement-card reveal">
+          <span class="achievement-icon" aria-hidden="true">🏆</span>
+          <div class="achievement-title">2× IBFF World Champion</div>
+          <p class="achievement-desc">Koper, Slovenia — June 2022 &amp; October 2023. Disabled Bodybuilding Division. Representing South Africa on the world stage — twice.</p>
+          <span class="achievement-note">Both titles self-funded. No sponsor. No government support.</span>
+        </div>
+        <div class="achievement-card reveal reveal-delay-1">
+          <span class="achievement-icon" aria-hidden="true">🥇</span>
+          <div class="achievement-title">SA National Champion</div>
+          <p class="achievement-desc">His very first bodybuilding competition. He entered it. He won it. Qualified directly for the IBFF World Championship in the same breath.</p>
+          <span class="achievement-note">First competition. First title. Then the world.</span>
+        </div>
+        <div class="achievement-card reveal reveal-delay-2">
+          <span class="achievement-icon" aria-hidden="true">💪</span>
+          <div class="achievement-title">EP Colours in Powerlifting</div>
+          <p class="achievement-desc">National standard achieved in powerlifting before he'd even started bodybuilding. Won the U/72kg competition on his very first attempt.</p>
+        </div>
+        <div class="achievement-card reveal">
+          <span class="achievement-icon" aria-hidden="true">📰</span>
+          <div class="achievement-title">Rolling Inspiration — Cover Athlete</div>
+          <p class="achievement-desc">Featured on the cover of South Africa's leading mobility lifestyle magazine, Issue 2, 2022. The country took notice.</p>
+          <span class="achievement-note">The cover that started a movement.</span>
+        </div>
+        <div class="achievement-card reveal reveal-delay-1">
+          <span class="achievement-icon" aria-hidden="true">📺</span>
+          <div class="achievement-title">SABC News Feature</div>
+          <p class="achievement-desc">Nationally televised athlete feature ahead of the 2022 World Championships. South Africa watched. Then he went to Slovenia and won.</p>
+        </div>
+        <div class="achievement-card reveal reveal-delay-2">
+          <span class="achievement-icon" aria-hidden="true">🎙️</span>
+          <div class="achievement-title">Disability Rights Awareness Speaker</div>
+          <p class="achievement-desc">Invited to speak at the EC Department of Health's National Disability Rights Awareness Month. TruFM radio guest, November 2022.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         STORY — Editorial Timeline
+    ══════════════════════════════════════ -->
+    <section class="story-section" id="story" aria-labelledby="story-heading">
+
+      <div class="story-intro reveal">
+        <div>
+          <span class="section-label">His Story</span>
+          <h2 class="section-title" id="story-heading">The Mirror<br>Moment</h2>
+          <p class="section-body">
+            Not a comeback. Not a recovery. A story that never stopped — because Max never let it.
+          </p>
+        </div>
+        <div>
+          <p class="section-body">
+            Most people, when they think about what it takes to become a world champion, picture a childhood of early mornings, coaches, sponsorship deals, and perfect conditions. Max Kulati's story has none of those things. What it has instead is something harder to name and impossible to manufacture — a person who decided, from the inside out, that his body would not be the limit of what he could become.
+          </p>
+        </div>
+      </div>
+
+      <div class="story-timeline">
+
+        <!-- Chapter 1 -->
+        <div class="story-chapter reveal">
+          <div class="chapter-inner">
+            <div class="chapter-content">
+              <span class="chapter-year">2014</span>
+              <h3 class="chapter-title">The Operation That Changed Everything</h3>
+              <p class="chapter-body">
+                Max was 22 years old when he went in for surgery. He came out with a changed body — partial paralysis, a wheelchair, and a future that looked nothing like he had planned.
+              </p>
+              <p class="chapter-body">
+                He was living in Moeggesukkel, one of the most under-resourced neighbourhoods in Kariega, Eastern Cape. There was no safety net. No rehabilitation programme waiting for him. No clear path forward.
+              </p>
+              <blockquote class="chapter-quote">
+                "I realized I needed to transform my negative thoughts and find pride in myself again."
+              </blockquote>
+              <p class="chapter-body">
+                Most people would have called that the end of the story. Max was already writing the next chapter.
+              </p>
+            </div>
+            <div class="chapter-visual">
+              <img src="photo_ig_son_school.png" alt="Macethandile 'Max' Kulati with his son on his first day at a new school — the man behind the champion" loading="lazy" style="object-position: center 15%;">
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 2 -->
+        <div class="story-chapter reveal">
+          <div class="chapter-inner">
+            <div class="chapter-content">
+              <span class="chapter-year">2018</span>
+              <h3 class="chapter-title">Two Kilograms. A Bedroom. A Beginning.</h3>
+              <p class="chapter-body">
+                Four years after surgery, Max picked up a pair of two-kilogram dumbbells. Not in a gym — in his bedroom. There was no coach, no programme, no plan. Just a man who needed to feel something.
+              </p>
+              <p class="chapter-body">
+                That year, he entered his first powerlifting competition. He won the U/72kg class. He kept winning. He earned his Eastern Province colours. He achieved national standard. And then, with powerlifting mastered, he looked for the next challenge.
+              </p>
+              <blockquote class="chapter-quote">
+                "I want to inspire everyone so that when they look at me, they think: if he can do it, so can I."
+              </blockquote>
+            </div>
+            <div class="chapter-visual">
+              <img src="photo_gym_flex.png" alt="Max Kulati training in the gym, flexing his arm — the muscular development built from two kilogram dumbbells in a bedroom" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 3 -->
+        <div class="story-chapter reveal">
+          <div class="chapter-inner">
+            <div class="chapter-content">
+              <span class="chapter-year">2021</span>
+              <h3 class="chapter-title">First Bodybuilding Competition. First Title.</h3>
+              <p class="chapter-body">
+                Max turned to bodybuilding. No one in his circle had done it before. There was no playbook for a partially paralysed man from Kariega to follow. He trained anyway — obsessively, consistently, on his own terms.
+              </p>
+              <p class="chapter-body">
+                His first ever bodybuilding competition: he was crowned South African National Champion. In the same moment, he qualified for the IBFF World Championship in Koper, Slovenia.
+              </p>
+              <p class="chapter-body">
+                First competition. First national title. A spot on the world stage. That is not normal. That is Max Kulati.
+              </p>
+            </div>
+            <div class="chapter-visual">
+              <img src="photo_stage_presentation.png" style="object-position: center top;" alt="Max Kulati crowned South African National Champion at his very first bodybuilding competition" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 4 -->
+        <div class="story-chapter reveal">
+          <div class="chapter-inner">
+            <div class="chapter-content">
+              <span class="chapter-year">4 June 2022</span>
+              <h3 class="chapter-title">Koper, Slovenia. World Champion.</h3>
+              <p class="chapter-body">
+                He packed a bag. He got on a plane. He flew to Slovenia — a country most people in Moeggesukkel would never have the means to visit. He represented South Africa at the IBFF World Disabled Bodybuilding Championship.
+              </p>
+              <p class="chapter-body">
+                On 4 June 2022, the judges' decision was unanimous. Macethandile "Max" Kulati of Kariega, Eastern Cape, South Africa — World Champion.
+              </p>
+              <blockquote class="chapter-quote">
+                "Against all odds, I can do it."
+              </blockquote>
+            </div>
+            <div class="chapter-visual">
+              <img src="photo_stage_backpose.png" alt="Max Kulati performing rear double bicep pose on the IBFF World Championship stage — Koper, Slovenia, June 2022" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter 5 -->
+        <div class="story-chapter reveal">
+          <div class="chapter-inner">
+            <div class="chapter-content">
+              <span class="chapter-year">21 October 2023</span>
+              <h3 class="chapter-title">He Went Back. He Won Again.</h3>
+              <p class="chapter-body">
+                Winning once could be called an upset. Winning twice is a statement. On 21 October 2023, Max returned to Slovenia and stood on the same stage. He was not defending a title. He was claiming it again.
+              </p>
+              <p class="chapter-body">
+                Two-time IBFF World Disabled Bodybuilding Champion. Still no sponsor. Still no government funding. Still from Kariega. Still showing up.
+              </p>
+              <blockquote class="chapter-quote">
+                "The gym is my second church after church. I'm obsessed with weights. The gym is my comfort zone — a place for me to clear my mind."
+              </blockquote>
+              <p class="chapter-body">
+                This is not a comeback story. This is a story that never stopped.
+              </p>
+            </div>
+            <div class="chapter-visual">
+              <img src="photo_stage_smile.png" alt="Max Kulati on stage — the joy of a two-time world champion, Slovenia 2023" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.story-timeline -->
+    </section>
+
+    <!-- ══════════════════════════════════════
+         JOURNEY IN PHOTOS — Full Carousel
+    ══════════════════════════════════════ -->
+    <section class="journey-section" id="journey" aria-labelledby="journey-heading">
+      <div class="journey-header reveal">
+        <div>
+          <span class="section-label">On Stage &amp; In the Gym</span>
+          <h2 class="section-title" id="journey-heading">The Journey<br>in Photos</h2>
+        </div>
+        <a
+          href="https://www.instagram.com/maxibffpro/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-outline"
+          style="white-space:nowrap;"
+          aria-label="Follow Max on Instagram (opens in new tab)"
+        >Follow on Instagram</a>
+      </div>
+
+      <div
+        class="photo-grid"
+        role="list"
+        aria-label="Photo gallery of Max Kulati's journey"
+      >
+        <a class="photo-tile" role="listitem" href="https://www.instagram.com/maxibffpro/" target="_blank" rel="noopener noreferrer" aria-label="The Black Bull stage pose — view on Instagram">
+          <img src="photo_stage_local.png" style="object-position: center 35%;" alt="Max Kulati on stage — warm golden lighting, extraordinary muscularity, Black Bull branding" loading="lazy">
+          <div class="photo-tile-overlay">
+            <span class="photo-tile-label">On Stage · Local Championship</span>
+            <span class="photo-tile-desc">The Black Bull. Kariega's own.</span>
+          </div>
+        </a>
+
+        <a class="photo-tile" role="listitem" href="https://www.instagram.com/maxibffpro/" target="_blank" rel="noopener noreferrer" aria-label="IBFF World Championship rear double bicep — view on Instagram">
+          <img src="photo_stage_backpose.png" style="object-position: center 10%;" alt="Max Kulati performing rear double bicep pose — IBFF World Championship, Koper Slovenia 2022" loading="lazy">
+          <div class="photo-tile-overlay">
+            <span class="photo-tile-label">World Championship · Slovenia 2022</span>
+            <span class="photo-tile-desc">The back built in a bedroom.</span>
+          </div>
+        </a>
+
+        <a class="photo-tile" role="listitem" href="https://www.instagram.com/maxibffpro/" target="_blank" rel="noopener noreferrer" aria-label="Championship stage presentation — view on Instagram">
+          <img src="photo_stage_presentation.png" alt="Max Kulati on stage being recognised at a championship — broad smile, genuine joy" loading="lazy">
+          <div class="photo-tile-overlay">
+            <span class="photo-tile-label">After the Final Pose</span>
+            <span class="photo-tile-desc">That smile says everything.</span>
+          </div>
+        </a>
+
+        <a class="photo-tile" role="listitem" href="https://www.instagram.com/maxibffpro/" target="_blank" rel="noopener noreferrer" aria-label="Competition stage confidence — view on Instagram">
+          <img src="photo_stage_smile.png" alt="Max Kulati posing on competition stage — confident smile, powerful physique" loading="lazy">
+          <div class="photo-tile-overlay">
+            <span class="photo-tile-label">Competition Stage</span>
+            <span class="photo-tile-desc">He doesn't just show up. He owns it.</span>
+          </div>
+        </a>
+
+        <a class="photo-tile" role="listitem" href="https://www.instagram.com/maxibffpro/" target="_blank" rel="noopener noreferrer" aria-label="Championship ceremony handshake — view on Instagram">
+          <img src="photo_stage_handshake.png" style="object-position: 25% 20%;" alt="Max Kulati shaking hands with IBFF president on stage — blue sparkle backdrop, Koper Slovenia" loading="lazy">
+          <div class="photo-tile-overlay">
+            <span class="photo-tile-label">Championship Ceremony</span>
+            <span class="photo-tile-desc">Official recognition at the top level.</span>
+          </div>
+        </a>
+
+        <a class="photo-tile" role="listitem" href="https://www.instagram.com/maxibffpro/" target="_blank" rel="noopener noreferrer" aria-label="Official IBFF Pro card — Macethandile Bethwell Kulati">
+          <img src="photo_ibffpro_card.png" style="object-position: center 30%;" alt="Official IBFF Pro card — Macethandile Bethwell Kulati, International Bodybuilding Federation Professional" loading="lazy">
+          <div class="photo-tile-overlay">
+            <span class="photo-tile-label">IBFF PRO Card</span>
+            <span class="photo-tile-desc">First wheelchair pro bodybuilder in South Africa.</span>
+          </div>
+        </a>
+
+        <a class="photo-tile" role="listitem" href="https://www.instagram.com/maxibffpro/" target="_blank" rel="noopener noreferrer" aria-label="Max Kulati gym bicep pose — view on Instagram">
+          <img src="photo_ig_pose_redvest.png" style="object-position: center 15%;" alt="Max Kulati performing front double bicep pose at the gym — red Iron Wolf vest, barbells behind him" loading="lazy">
+          <div class="photo-tile-overlay">
+            <span class="photo-tile-label">Iron Wolf · Training Day</span>
+            <span class="photo-tile-desc">Built this body. Owns every rep.</span>
+          </div>
+        </a>
+
+        <a class="photo-tile" role="listitem" href="https://www.instagram.com/maxibffpro/" target="_blank" rel="noopener noreferrer" aria-label="IBFF PRO jacket — view on Instagram">
+          <img src="photo_ibffpro_jacket.png" style="object-position: center 25%;" alt="Max Kulati wearing his IBFF PRO jacket — back view, earned status" loading="lazy">
+          <div class="photo-tile-overlay">
+            <span class="photo-tile-label">IBFF PRO</span>
+            <span class="photo-tile-desc">You don't buy these. You earn them.</span>
+          </div>
+        </a>
+
+        <a class="photo-tile" role="listitem" href="https://www.instagram.com/maxibffpro/" target="_blank" rel="noopener noreferrer" aria-label="IBFF World Championship front pose — view on Instagram">
+          <img src="photo_stage_frontpose.png" style="object-position: center 10%;" alt="Macethandile 'Max' Kulati — front double bicep pose on the IBFF World Championship stage" loading="lazy">
+          <div class="photo-tile-overlay">
+            <span class="photo-tile-label">World Stage · Front Pose</span>
+            <span class="photo-tile-desc">From a bedroom in Kariega to this.</span>
+          </div>
+        </a>
+
+        <a class="photo-tile" role="listitem" href="https://www.instagram.com/maxibffpro/" target="_blank" rel="noopener noreferrer" aria-label="Community speaking event — view on Instagram">
+          <img src="photo_community_event.png" style="object-position: center 15%;" alt="Max Kulati speaking at a community rehabilitation event" loading="lazy">
+          <div class="photo-tile-overlay">
+            <span class="photo-tile-label">Beyond the Stage</span>
+            <span class="photo-tile-desc">In the schools. In the community.</span>
+          </div>
+        </a>
+
+        <a class="photo-tile" role="listitem" href="https://www.instagram.com/maxibffpro/" target="_blank" rel="noopener noreferrer" aria-label="Max Kulati world champion portrait — view on Instagram">
+          <img src="photo_hero_banner.png" alt="Macethandile 'Max' Kulati — world champion bodybuilder from Kariega, South Africa" loading="lazy">
+          <div class="photo-tile-overlay">
+            <span class="photo-tile-label">From Kariega to the World</span>
+            <span class="photo-tile-desc">World champion. Twice. No sponsor.</span>
+          </div>
+        </a>
+
+        <a class="photo-tile" role="listitem" href="https://www.instagram.com/maxibffpro/" target="_blank" rel="noopener noreferrer" aria-label="Championship trophies collection — view on Instagram">
+          <img src="photo_trophies.png" style="object-position: center 30%;" alt="Max Kulati's full championship trophies and belts collection — all self-funded" loading="lazy">
+          <div class="photo-tile-overlay">
+            <span class="photo-tile-label">The Hardware</span>
+            <span class="photo-tile-desc">Every one earned. Not a single sponsor.</span>
+          </div>
+        </a>
+
+      </div><!-- /.photo-grid -->
+
+      <div class="journey-section-footer">
+        <a
+          href="https://www.instagram.com/maxibffpro/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-outline"
+        >See More on Instagram @maxibffpro</a>
+      </div>
+
+    </section>
+
+    <!-- ══════════════════════════════════════
+         CINEMATIC BANNER
+    ══════════════════════════════════════ -->
+    <div class="champ-banner reveal" role="region" aria-label="Champion quote">
+      <div class="champ-bg" aria-hidden="true">
+        <img src="photo_stage_handshake.png" alt="" style="object-position:25% top;">
+        <img src="photo_ibffpro_card.png" alt="" style="object-position:center 20%;">
+        <img src="photo_stage_smile.png" alt="" style="object-position:center top;">
+      </div>
+      <div class="champ-text">
+        <h2>AGAINST ALL <span>ODDS</span></h2>
+        <p>"I can do it." — Every stage. Every rep. Every school. Every day.</p>
+        <a href="#support" class="btn-primary">Be Part of His Story</a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         COMMUNITY
+    ══════════════════════════════════════ -->
+    <section class="does" id="community" aria-labelledby="community-heading">
+      <div class="reveal">
+        <span class="section-label">Beyond the Stage</span>
+        <h2 class="section-title" id="community-heading">More Than<br>a Champion</h2>
+        <p class="section-body" style="margin-top:12px;">
+          Between training camps and competitions, Max is in the community — giving back the way only someone who has lived it can.
+        </p>
+      </div>
+      <div class="does-grid">
+        <div class="does-cards reveal reveal-delay-1">
+          <div class="does-card">
+            <h3>Motivational Speaker</h3>
+            <p>Max visits schools across the Eastern Cape, using his personal story to reach young people. He doesn't lecture. He shows up in his wheelchair, shirtless at competitions, on magazine covers, and says: this is what is possible.</p>
+            <p>He's spoken at the EC Department of Health's National Disability Rights Awareness Month and appears regularly on radio programmes.</p>
+            <p class="quote">"I want to inspire everyone so that when they look at me, they think: if he can do it, so can I."</p>
+          </div>
+          <div class="does-card">
+            <h3>Fitness Coach &amp; Personal Trainer</h3>
+            <p>Max runs a coaching practice helping clients lose weight, build muscle, and develop discipline. He works with what's available — not a well-resourced facility, but a real one. One that keeps youth off the streets.</p>
+            <p class="quote">"The girls and guys who I train with motivate me and I motivate them."</p>
+          </div>
+          <div class="does-card">
+            <h3>Community Role Model</h3>
+            <p>From the rehabilitation centre to the stage in Slovenia, Max carries Kariega with him everywhere he goes. He is proof — living, breathing, tangible proof — that where you come from does not define where you're going.</p>
+          </div>
+        </div>
+        <div class="does-single-image reveal reveal-delay-2" aria-hidden="true">
+          <img src="photo_ig_redvest_gym.png" alt="" loading="lazy" style="object-position: center 20%;">
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         PRESS — The World Has Noticed (with links)
+    ══════════════════════════════════════ -->
+    <section class="press" id="press" aria-labelledby="press-heading">
+      <div class="press-inner">
+        <div class="reveal">
+          <span class="section-label" style="justify-content:center;">Media &amp; Press</span>
+          <h2 class="section-title" id="press-heading" style="font-size:clamp(2.5rem,5vw,4.5rem);">The World Has Noticed</h2>
+          <p class="section-body" style="margin:0 auto; max-width:500px; text-align:center;">
+            From local radio to the front pages — every platform that has encountered Max's story has wanted to share it.
+          </p>
+        </div>
+        <div class="press-quotes reveal reveal-delay-1">
+          <div class="press-quote">
+            <blockquote>"Against all odds, I can do it."</blockquote>
+            <cite>Rolling Inspiration Magazine, Issue 2 — 2022</cite>
+          </div>
+          <div class="press-quote">
+            <blockquote>"Max crowned world champ!"</blockquote>
+            <cite>UD Express — Front Page, June 2022</cite>
+          </div>
+          <div class="press-quote">
+            <blockquote>"Pick yourself up. Accept it. Motivate yourself to motivate others."</blockquote>
+            <cite>Max Kulati — Rolling Inspiration Magazine</cite>
+          </div>
+        </div>
+        <div class="press-logos reveal reveal-delay-2">
+          <a
+            href="https://rollinginspiration.co.za"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="press-logo-item"
+            aria-label="Rolling Inspiration Magazine (opens in new tab)"
+          >Rolling Inspiration</a>
+          <a
+            href="https://youtu.be/S1R5oTLqYiQ"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="press-logo-item"
+            aria-label="UD Express — watch on YouTube (opens in new tab)"
+          >UD Express</a>
+          <a
+            href="https://youtu.be/YXuyZvjhe9o"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="press-logo-item"
+            aria-label="SABC News feature on YouTube (opens in new tab)"
+          >SABC News</a>
+          <a
+            href="https://www.trufm.co.za"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="press-logo-item"
+            aria-label="TruFM radio (opens in new tab)"
+          >TruFM</a>
+          <a
+            href="https://youtu.be/46LEihlZKH8"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="press-logo-item"
+            aria-label="EC Department of Health speaker — YouTube (opens in new tab)"
+          >EC Dept of Health</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         HARDWARE — Full section
+    ══════════════════════════════════════ -->
+    <section class="hardware" aria-labelledby="hardware-heading">
+      <div class="hardware-photo reveal">
+        <img
+          src="photo_trophies.png"
+          alt="Macethandile 'Max' Kulati proudly displaying his full collection of championship trophies, belts, and awards — every one self-funded, without a sponsor or government grant"
+          loading="lazy"
+        >
+      </div>
+      <div class="hardware-text reveal reveal-delay-1">
+        <span class="section-label">The Hardware</span>
+        <h2 class="section-title" id="hardware-heading">Earned.<br>Not Given.</h2>
+        <p class="section-body">
+          Every trophy. Every belt. Every medal in this collection was earned without a sponsorship deal, without government recognition, and without a professional support structure. Just a man from Kariega and the body he built in his bedroom.
+        </p>
+        <div class="hardware-titles">
+          <div class="hardware-title-row">
+            <span class="hardware-icon" aria-hidden="true">🏆</span>
+            <div class="hardware-detail">
+              <strong>IBFF World Disabled Bodybuilding Champion</strong>
+              <span>4 June 2022 · Koper, Slovenia — First title</span>
+            </div>
+          </div>
+          <div class="hardware-title-row">
+            <span class="hardware-icon" aria-hidden="true">🏆</span>
+            <div class="hardware-detail">
+              <strong>IBFF World Disabled Bodybuilding Champion</strong>
+              <span>21 October 2023 · Koper, Slovenia — Second title</span>
+            </div>
+          </div>
+          <div class="hardware-title-row">
+            <span class="hardware-icon" aria-hidden="true">🥇</span>
+            <div class="hardware-detail">
+              <strong>South African National Bodybuilding Champion</strong>
+              <span>First bodybuilding competition entered. First title won.</span>
+            </div>
+          </div>
+          <div class="hardware-title-row">
+            <span class="hardware-icon" aria-hidden="true">💪</span>
+            <div class="hardware-detail">
+              <strong>Eastern Province Colours — Powerlifting</strong>
+              <span>U/72kg category · National standard achieved</span>
+            </div>
+          </div>
+          <div class="hardware-title-row">
+            <span class="hardware-icon" aria-hidden="true">🎖️</span>
+            <div class="hardware-detail">
+              <strong>IBFF Pro Status</strong>
+              <span>Internationally recognised professional bodybuilder</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SUPPORT
+    ══════════════════════════════════════ -->
+    <section class="support" id="support" aria-labelledby="support-heading">
+      <div class="support-img-wrap reveal">
+        <img
+          src="photo_ibffpro_card.png"
+          alt="Official IBFF Pro promotional card for Macethandile Bethwell Kulati — South African world champion"
+          loading="lazy"
+        >
+      </div>
+      <div class="reveal reveal-delay-1">
+        <span class="section-label">Support Max</span>
+        <h2 id="support-heading">Be Part of<br>His Story</h2>
+        <p style="margin-top:16px;">
+          Max receives no government funding. Disabled bodybuilding is not officially recognised as a sport in South Africa — which means athletes like Max fund every flight, every entry fee, every supplement, every hotel night in Europe themselves.
+        </p>
+        <p>
+          He has done this twice. He wants to do it again. Every contribution — no matter the size — keeps a world champion in the sport and a role model in front of the young people who need to see him.
+        </p>
+
+        <div class="use-of-funds">
+          <h4>Your contribution goes directly toward</h4>
+          <div class="fund-item"><span class="fund-arrow">→</span> International competition travel and accommodation</div>
+          <div class="fund-item"><span class="fund-arrow">→</span> Nutritional supplements and training costs</div>
+          <div class="fund-item"><span class="fund-arrow">→</span> Competition registration and federation fees</div>
+          <div class="fund-item"><span class="fund-arrow">→</span> Equipment and wheelchair maintenance</div>
+        </div>
+
+        <p class="banking-headline">Send Your Support Directly</p>
+        <div class="banking-box">
+          <h4>Banking Details</h4>
+          <div class="banking-row">
+            <span class="banking-label">Bank</span>
+            <span class="banking-value">Capitec</span>
+          </div>
+          <div class="banking-row">
+            <span class="banking-label">Account Number</span>
+            <span class="banking-value">1854590403</span>
+          </div>
+          <div class="banking-row">
+            <span class="banking-label">Email</span>
+            <span class="banking-value">mkulati05@gmail.com</span>
+          </div>
+          <div class="banking-row">
+            <span class="banking-label">Cell</span>
+            <span class="banking-value">063 663 8635</span>
+          </div>
+          <button class="copy-btn" id="copyAccBtn" onclick="copyAccountNumber()">
+            &#x2398; Copy Account Number
+          </button>
+        </div>
+
+        <div class="support-ctas">
+          <a href="mailto:mkulati05@gmail.com?subject=Supporting%20Max%20Kulati" class="btn-primary">
+            Make a Donation
+          </a>
+          <a href="https://www.instagram.com/maxibffpro/" target="_blank" rel="noopener noreferrer" class="btn-outline">
+            Share His Story
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SOCIAL
+    ══════════════════════════════════════ -->
+    <section class="social" aria-labelledby="social-heading">
+      <div class="reveal">
+        <span class="section-label" style="justify-content:center;">Follow the Journey</span>
+        <h2 class="section-title" id="social-heading" style="font-size:clamp(2.5rem,5vw,4rem);">Stay Close to Every Rep</h2>
+      </div>
+      <div class="social-grid reveal reveal-delay-1">
+        <a href="https://www.instagram.com/maxibffpro/" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Follow @maxibffpro on Instagram (opens in new tab)">
+          <span class="social-icon" aria-hidden="true">📸</span>
+          <span class="social-platform">Instagram</span>
+          <span class="social-handle">@maxibffpro</span>
+        </a>
+        <a href="https://www.instagram.com/ibffprom/" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Follow @ibffprom IBFF Pro on Instagram (opens in new tab)">
+          <span class="social-icon" aria-hidden="true">🏆</span>
+          <span class="social-platform">IBFF Pro Page</span>
+          <span class="social-handle">@ibffprom</span>
+        </a>
+        <a href="https://www.facebook.com/macethandilebethwell.kulati.3/" target="_blank" rel="noopener noreferrer" class="social-card" aria-label="Follow Macethandile Bethwell Kulati on Facebook (opens in new tab)">
+          <span class="social-icon" aria-hidden="true">👥</span>
+          <span class="social-platform">Facebook</span>
+          <span class="social-handle">Macethandile Bethwell Kulati</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         YOUTUBE
+    ══════════════════════════════════════ -->
+    <section class="youtube" aria-labelledby="yt-heading">
+      <div class="reveal">
+        <span class="section-label">Watch His Story</span>
+        <h2 class="section-title" id="yt-heading">On Camera</h2>
+      </div>
+      <div class="yt-grid reveal reveal-delay-1">
+        <a href="https://youtu.be/S1R5oTLqYiQ" target="_blank" rel="noopener noreferrer" class="yt-card" aria-label="Watch: Disabled bodybuilder from Kariega crowned world champion (YouTube)">
+          <div class="yt-thumb">
+            <img src="photo_stage_smile.png" alt="" loading="lazy">
+          </div>
+          <div class="yt-info">
+            <h4>Disabled bodybuilder from Kariega crowned world champion</h4>
+            <span>Watch on YouTube →</span>
+          </div>
+        </a>
+        <a href="https://youtu.be/YXuyZvjhe9o" target="_blank" rel="noopener noreferrer" class="yt-card" aria-label="Watch: SABC News — Max selected to represent SA in Slovenia (YouTube)">
+          <div class="yt-thumb">
+            <img src="photo_stage_backpose.png" alt="" loading="lazy" style="object-position:top;">
+          </div>
+          <div class="yt-info">
+            <h4>SABC News: Max selected to represent SA in Slovenia</h4>
+            <span>Watch on YouTube →</span>
+          </div>
+        </a>
+        <a href="https://youtu.be/lowubQhs5-M" target="_blank" rel="noopener noreferrer" class="yt-card" aria-label="Watch: SABC News — Max lifts world title at Slovenia championships (YouTube)">
+          <div class="yt-thumb">
+            <img src="photo_stage_presentation.png" alt="" loading="lazy">
+          </div>
+          <div class="yt-info">
+            <h4>SABC News: Max lifts world title at Slovenia championships</h4>
+            <span>Watch on YouTube →</span>
+          </div>
+        </a>
+        <a href="https://youtu.be/46LEihlZKH8" target="_blank" rel="noopener noreferrer" class="yt-card" aria-label="Watch: Guest Speaker — EC Dept of Health: Disability Rights Awareness (YouTube)">
+          <div class="yt-thumb">
+            <img src="photo_community_event.png" alt="" loading="lazy">
+          </div>
+          <div class="yt-info">
+            <h4>Guest Speaker — EC Dept of Health: Disability Rights Awareness</h4>
+            <span>Watch on YouTube →</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer role="contentinfo">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>MAX <span>POWER</span></h3>
+        <p>Macethandile "Max" Kulati. Partially paralysed. IBFF Pro Athlete. 2× World Disabled Bodybuilding Champion. Motivational Speaker. Fitness Coach. From Kariega, Eastern Cape, South Africa.</p>
+        <span class="footer-tagline">"I'm Strong and Able." 🇿🇦</span>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <a href="#achievements">Achievements</a>
+        <a href="#story">His Story</a>
+        <a href="#journey">Gallery</a>
+        <a href="#community">Community</a>
+        <a href="#press">Press</a>
+        <a href="#support">Support Max</a>
+      </div>
+      <div class="footer-col">
+        <h4>Get in Touch</h4>
+        <p>mkulati05@gmail.com</p>
+        <p>063 663 8635</p>
+        <a href="https://www.instagram.com/maxibffpro/" target="_blank" rel="noopener noreferrer">@maxibffpro on Instagram</a>
+        <a href="https://www.facebook.com/macethandilebethwell.kulati.3/" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <p style="margin-top:16px; font-size:0.78rem; color:rgba(240,240,240,0.32); line-height:1.8;">
+          #TEAMMAX Organisers<br>
+          Maureen: 073 604 5596<br>
+          Elvida: 072 277 9623<br>
+          Arnold: 081 270 2631
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Macethandile "Max" Kulati &middot; All rights reserved &middot; IBFF Pro Athlete &middot; South Africa 🇿🇦</p>
+      <p><em>Built to champion a champion.</em></p>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════
+       SCRIPTS
+  ══════════════════════�
