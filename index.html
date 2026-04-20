@@ -2178,7 +2178,7 @@
       if (typeof gsap === 'undefined') {
         // GSAP failed to load — make everything visible immediately
         document.querySelectorAll(
-          '.hero-eyebrow, .hero-title-line, .hero-sub, .badge, .hero-ctas, .hero-scroll'
+          '.hero-eyebrow, .hero-title-line, .hero-sub, .badge, .hero-ctas, .hero-scroll, .hero-photo'
         ).forEach(function(el) {
           el.style.opacity = '1';
           el.style.transform = 'none';
@@ -2188,7 +2188,8 @@
 
       var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      tl.to('.hero-eyebrow',    { opacity: 1, duration: 0.6, delay: 0.15 })
+      tl.to('#gsap-photo',      { opacity: 1, y: 0, duration: 1.0, delay: 0.1 })
+        .to('.hero-eyebrow',    { opacity: 1, duration: 0.6 }, '-=0.6')
         .to('#gsap-line1',      { opacity: 1, y: 0, duration: 0.7 }, '-=0.3')
         .to('#gsap-line2',      { opacity: 1, y: 0, duration: 0.7 }, '-=0.5')
         .to('.hero-sub',        { opacity: 1, duration: 0.6 }, '-=0.4')
