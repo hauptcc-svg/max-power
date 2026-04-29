@@ -727,6 +727,8 @@
       .cover-text { padding: 120px 32px 60px; }
       .section { padding: 72px 32px; }
       .section-wide { padding: 72px 32px; }
+      .stats-band { padding: 60px 32px; }
+      .media-strip { padding: 60px 32px; }
       .stats-row { grid-template-columns: repeat(3, 1fr); }
       .tiers-grid { grid-template-columns: 1fr; }
       .why-grid { grid-template-columns: 1fr; }
@@ -736,6 +738,38 @@
       .values-grid { grid-template-columns: repeat(2, 1fr); }
       .media-quotes { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: 16px; text-align: center; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .nav-label { display: none; }
+      .cover-text { padding: 100px 20px 48px; }
+      .cover-image { height: 280px; }
+      .cover-stats { gap: 24px; flex-wrap: wrap; }
+      .section { padding: 56px 20px; }
+      .section-wide { padding: 56px 20px; }
+      .stats-band { padding: 48px 20px; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .story-strip-text { padding: 48px 20px; }
+      .media-strip { padding: 48px 20px; }
+      .contact-section { padding: 80px 20px; }
+      footer { padding: 32px 20px; }
+
+      /* Make comparison table horizontally scrollable on phones */
+      .benefits-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0 -20px;
+        padding: 0 20px;
+      }
+      .benefits-table {
+        min-width: 480px;
+      }
+
+      .values-grid { grid-template-columns: 1fr; }
+      .contact-ctas { flex-direction: column; align-items: stretch; }
+      .contact-ctas a { text-align: center; }
+      .contact-detail { gap: 24px; }
     }
   </style>
 </head>
@@ -1015,6 +1049,7 @@
       <span class="label">Full Comparison</span>
       <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,3.5vw,3rem);margin-bottom:8px;">What's Included</h2>
       <div class="section-divider"></div>
+      <div class="benefits-table-wrap">
       <table class="benefits-table">
         <thead>
           <tr>
@@ -1081,6 +1116,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
       <p style="font-size:0.78rem; color:var(--dimmed); margin-top:20px;">All packages are negotiable. Custom partnership structures available on request.</p>
     </div>
   </div>
@@ -1118,6 +1154,15 @@
     <p>Macethandile "Max" Kulati · 2× IBFF World Champion · Kariega, Eastern Cape · South Africa 🇿🇦</p>
     <a href="mailto:mkulati05@gmail.com">mkulati05@gmail.com</a>
   </footer>
+
+  <script>
+    document.querySelectorAll('a[href^="http"], a[href^="mailto"]').forEach(function(a) {
+      if (a.hostname && a.hostname !== location.hostname) {
+        a.setAttribute('target', '_blank');
+        a.setAttribute('rel', 'noopener noreferrer');
+      }
+    });
+  </script>
 
 </body>
 </html>

@@ -1370,9 +1370,29 @@
     }
 
     @media (max-width: 480px) {
-      .hero-title { font-size: clamp(4.5rem, 20vw, 7rem); }
+      nav { padding: 12px 16px; }
+      .nav-cta { padding: 8px 14px; font-size: 0.7rem; }
+      .hero-left { padding: 88px 16px 52px; }
+      .hero-title { font-size: clamp(4rem, 20vw, 6.5rem); }
+      .hero-ctas { flex-direction: column; gap: 10px; }
+      .hero-ctas a { text-align: center; }
+      .hero-scroll { left: 16px; }
+      .intro, .story-section, .support { padding: 52px 16px; gap: 32px; }
+      .achievements, .does, .press, .social, .youtube { padding: 52px 16px; }
+      .journey-header { padding: 0 16px; }
+      .journey-section-footer { padding: 20px 16px; }
       .yt-grid { grid-template-columns: 1fr; }
-      .photo-grid { gap: 2px; }
+      .photo-grid { gap: 2px; grid-template-columns: repeat(2, 1fr); }
+      .words-quote-wrap { padding: 48px 16px; }
+      .champ-text { padding: 0 16px; }
+      .hardware-text { padding: 40px 16px; }
+      .hardware-photo { height: 300px; }
+      .story-timeline { padding-left: 20px; }
+      .stats-bar { padding: 28px 16px; gap: 12px; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 10px; }
+      .support-ctas { flex-direction: column; }
+      .support-ctas a { text-align: center; }
+      .banking-row { flex-direction: column; align-items: flex-start; gap: 2px; }
     }
   </style>
 </head>
@@ -2283,6 +2303,14 @@
         setTimeout(function() { btn.innerHTML = '&#x2398; Copy Account Number'; }, 2000);
       }
     }
+
+  /* ── EXTERNAL LINKS → NEW TAB ── */
+  document.querySelectorAll('a[href^="http"], a[href^="mailto"]').forEach(function(a) {
+    if (a.hostname && a.hostname !== location.hostname) {
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener noreferrer');
+    }
+  });
   </script>
 </body>
 </html>
